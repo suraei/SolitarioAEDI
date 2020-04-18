@@ -238,14 +238,14 @@ public class Mesa {
     }
 
     //Comprueba si los montones exteriores han sido completados
-    public boolean verificarMontonExterior() {
-        boolean lleno = true;
+    public boolean MontonExteriorCompleto() {
+        boolean flag = true;
         //comprueba cada stack del monton
         for (Stack<Carta> stack : montonExterior) {
             if (stack.size() != 10) {
-                lleno = false; // Si hay algún montón que no tenga 10 cartas significa que los montones exteriores no están llenos
+                flag = false; // Si hay algún montón que no tenga 10 cartas significa que los montones exteriores no están llenos
             }
         }
-        return lleno;
+        return flag;
     }
 }

@@ -5,22 +5,15 @@
  */
 package solitario.Core;
 
-import java.util.Scanner;
 
-public class Jugador {
-
-    Scanner entrada = new Scanner(System.in);
+public class Jugador { 
 
     private String nombre;
-    private Carta carta;
-    private final Mesa mesa;
 
-    public Jugador(String name, Carta card, Mesa table) {
+    public Jugador(String nombre) {
 
-        nombre = name;
-        carta = card;
-        mesa = table;
-
+        this.nombre = nombre;
+       
     }
 
     public String getNombre() {
