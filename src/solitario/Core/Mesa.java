@@ -108,7 +108,7 @@ public class Mesa {
         //Encima del 12 no se puede poner nada
         if (cartaOri.getNumero() == 12
                 || (cartaOri.getNumero() == 7 && cartaDest.getNumero() != 10)
-                || cartaOri.getNumero() != cartaDest.getNumero() - 1) {
+                || (cartaOri.getNumero() != 7 && cartaOri.getNumero() != cartaDest.getNumero() - 1)) {
             throw new Exception("Movimiento inválido : La carta de destino no es una unidad mayor que la de origen");
         }
 
@@ -172,7 +172,7 @@ public class Mesa {
 
         //Comprobar cartaOri sea una unidad mayor sobre la carta a solapar.
         if ((cartaOri.getNumero() == 10 && cartaDest.getNumero() != 7)
-                || cartaOri.getNumero() - 1 != cartaDest.getNumero()) {
+                || (cartaOri.getNumero() != 10 && cartaOri.getNumero() - 1 != cartaDest.getNumero()) ){
             throw new Exception("Movimiento inválido :La carta de destino no es una unidad menor que la de origen");
         }
         }
