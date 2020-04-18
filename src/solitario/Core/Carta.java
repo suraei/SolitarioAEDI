@@ -8,33 +8,31 @@ package solitario.Core;
  * @author AEDI
  */
 public class Carta {
-    
-    private int numero;
-    private Palos paloCarta;
 
-    public Carta(int numero, Palos paloCarta) {
+    private final int numero; // Final para quitar warnings (No se modifican los valores en ningún momento)
+    private final Palos palo;
+
+    public Carta(int numero, Palos palo) {
         this.numero = numero;
-        this.paloCarta = paloCarta;
+        this.palo = palo;
     }
 
     public int getNumero() {
-        return numero;
+        return this.numero; // por seguir el formato simplemente
     }
 
-
-    public Palos getPaloCarta() {
-        return paloCarta;
+    public Palos getPalo() {
+        return this.palo;
     }
-    
-    public String toString(){
-    
-        StringBuilder toret=new StringBuilder();
-        
-        toret.append("[").append(getNumero()).append("|").append(getPaloCarta()).append("]").append("\n");
-    
-    return toret.toString();
-    }
-		
 
+    @Override //toString() es un método que se está reescribiendo 
+    public String toString() {
+
+        StringBuilder toret = new StringBuilder();
+
+        toret.append("[").append(this.numero).append("|").append(this.palo).append("]"); // Quito salto línea para que no aparezcan todas en pila ( representación mesa mas fácil) , cambio el get. por this. (acceso directo al atributo, más eficiente)
+
+        return toret.toString();
+    }
 
 }
