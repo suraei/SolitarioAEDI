@@ -31,8 +31,8 @@ import java.util.Stack;
  */
 public class Mesa {
 
-    private Stack<Carta>[] montonExterior; // 4 montones ( los 4 palos) 
-    private Stack<Carta>[][] montonInterior;  // Una matriz
+    private final Stack<Carta>[] montonExterior; // 4 montones ( los 4 palos) 
+    private final Stack<Carta>[][] montonInterior;  // Una matriz
 
     public Mesa() {
         //Inicializa el monton exterior
@@ -161,9 +161,11 @@ public class Mesa {
         int montonDest = cartaOri.getPalo().ordinal();
 
         //Comprobación de que la primera carta escogida para mover sea un AS
-        if (montonExterior[montonDest].empty() && cartaOri.getNumero() != 1) {
-            throw new Exception("Movimiento inválido : Si un montón de un palo está vacío la primera carta a poner debe ser un as");
-        }
+        if (montonExterior[montonDest].empty()){
+            if(cartaOri.getNumero() != 1){
+                throw new Exception("Movimiento inválido : Si un montón de un palo está vacío la primera carta a poner debe ser un as");
+            }
+        }else{
 
         //Vemos que carta vamos a solapar
         Carta cartaDest = montonExterior[montonDest].peek();
@@ -173,7 +175,7 @@ public class Mesa {
                 || cartaOri.getNumero() - 1 != cartaDest.getNumero()) {
             throw new Exception("Movimiento inválido :La carta de destino no es una unidad menor que la de origen");
         }
-
+        }
         //Una vez listas las comprobaciones movemos la carta al montón exterior
         montonExterior[montonDest].push(montonInterior[filaOri][colOri].pop());
 
@@ -227,7 +229,7 @@ public class Mesa {
         for (Stack[] posicion : montonInterior) {// Recorremos posiciones de montón Interior
             for (Stack<Carta> monton : posicion) { // Accedemos a las cartas de cada posición
                 if (monton.empty()) {
-                    System.out.println(cartaInexistente);
+                    System.out.print(cartaInexistente);
                 } else {
                     System.out.print(monton.peek().toString()); // Mostramos la representación de la carta (clase carta método toString)
                 }
