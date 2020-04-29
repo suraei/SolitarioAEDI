@@ -129,10 +129,13 @@ public class Solitario {
         }
 
         //Jugar
-        //do{
+       
             jugar();
-        //}while(movimientosPosibles());
-        opcion= mostrarVictoria();
+        //if(mesa.movPosibles()){
+        opcion= mostrarVictoria();//}
+        //else{
+           // opcion=mostrarDerrota();
+        //}
         }while(opcion!=0);
         salir();
     }

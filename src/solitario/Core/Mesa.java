@@ -120,6 +120,158 @@ public class Mesa {
         }
         return flag;
     }
+
+//Metodo que verifica si existe algun movimiento posible
+    //si existe devuelve true y si no existe devuelve false
+    /* public boolean finDelJuego(){
+        boolean hayMovimientos=false;
+        //Carta en evaluacion
+        for (int i = 0; i < 4 && !hayMovimientos; i++) {
+            for (int j = 0; j < 4 && !hayMovimientos; j++) {
+                //Cartas a evaluar
+                for (int k = 0; k < 5 && !hayMovimientos; k++) {
+                    for (int l = 0; l < 4 && !hayMovimientos; l++) {
+                        
+                        //Verificacion de Movimientos interiores
+                        if(k!=4){
+                            //Se ignora la misma posicion y si alguna de ambas esta vacia
+                            if((i!=k || j!=l) && (!montonInterior[i][j].empty() && !montonInterior[k][l].empty())){
+                                //Si son del mismo palo
+                                if(montonInterior[i][j].peek().getPalo()==montonInterior[k][l].peek().getPalo()){
+                                    //Si son contiguas
+                                    if((montonInterior[i][j].peek().getNumero() == 7 && montonInterior[k][l].peek().getNumero() == 10)  
+                                        || (montonInterior[k][l].peek().getNumero() - montonInterior[i][j].peek().getNumero() == 1)){
+                                        hayMovimientos=true;
+                                    //Si no son contiguas
+                                    }else{
+                                        //Se comprueba si se pueden mover varias cartas apiladas
+                                        Stack<Carta> aux1 = new Stack<Carta>();
+                                        Stack<Carta> aux2 = new Stack<Carta>();
+                                        aux1.push(montonInterior[i][j].pop());
+                                        while(!(montonInterior[i][j].empty()) &&((aux1.peek().getNumero() == 7 && montonInterior[i][j].peek().getNumero() == 10)  
+                                            || (montonInterior[i][j].peek().getNumero() - aux1.peek().getNumero() == 1))
+                                            && (montonInterior[i][j].peek().isBocaArriba()) && (montonInterior[i][j].peek().getPalo() == aux1.peek().getPalo())){
+                                    
+                                                aux1.push(montonInterior[i][j].pop());
+                                        }
+                                        if((aux1.peek().getNumero() == 7 && montonInterior[k][l].peek().getNumero() == 10)  
+                                            || (montonInterior[k][l].peek().getNumero() - aux1.peek().getNumero() == 1)){
+                                                hayMovimientos=true;
+                                        }
+                                        while(!aux1.empty()){
+                                            montonInterior[i][j].push(aux1.pop());
+                                        } 
+                                    }
+                                }   
+                            }
+                        }
+                        
+                        //Verificacion de Movimientos exteriores
+                        else{
+                            //Se ignora la misma posicion y si la del monton interior esta vacia
+                            if(!montonInterior[i][j].empty()){
+                                //Si el monton exterior esta vacio
+                                if(montonExterior[l].empty()){
+                                    //Si el primer elemento del monton interior es igual a uno
+                                    if(montonInterior[i][j].peek().getNumero()==1)
+                                        hayMovimientos=true;
+                                //si el monton exterior no esta vacio
+                                }else{
+                                //Si son del mismo palo
+                                    if(montonInterior[i][j].peek().getPalo()==montonExterior[l].peek().getPalo()){
+                                        //Si son contiguas
+                                        if((montonInterior[i][j].peek().getNumero() == 10 && montonExterior[l].peek().getNumero() == 7)  
+                                            || (montonInterior[i][j].peek().getNumero() - montonExterior[l].peek().getNumero() == 1)){
+                                            hayMovimientos=true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        return hayMovimientos;
+    }*/
+    /*public boolean movPosibles() {
+        boolean movimientos = false;
+        int a = 0;//i
+        int b = 0;//j
+        int c = 0; //k
+        int d = 0;//l
+
+        Carta x = montonInterior[a][b].peek();
+        Carta comp = montonInterior[a][b].peek();
+
+        for (a = 0; a < montonInterior.length && !movimientos; a++) { // Recorre fila
+            for (b = 0; b < montonInterior[a].length && !movimientos; b++) { //Recorre columna de fila actual
+                for (c = 0; c < 5 && !movimientos; c++) {
+                    for (d = 0; d < 4 && !movimientos; d++) {
+                        //Verificacion de Movimientos interiores
+                        if (c != 4) {
+                            //Se ignora la misma posicion y si alguna de ambas esta vacia
+                            if ((a != c || b != d) && (!montonInterior[a][b].empty() && !montonInterior[c][d].empty())) {
+                                //Si son del mismo palo
+                                if (montonInterior[a][b].peek().getPalo() == montonInterior[c][d].peek().getPalo()) {
+                                    //Si son contiguas
+                                    if ((montonInterior[a][b].peek().getNumero() == 7 && montonInterior[c][d].peek().getNumero() == 10)
+                                            || (montonInterior[c][d].peek().getNumero() - montonInterior[a][b].peek().getNumero() == 1)) {
+                                        movimientos = true;
+                                        //Si no son contiguas
+                                    } else {
+                                        //Se comprueba si se pueden mover varias cartas apiladas
+                                        Stack<Carta> carta1 = new Stack<Carta>();
+                                        Stack<Carta> carta2 = new Stack<Carta>();
+                                        carta1.push(montonInterior[a][b].pop());
+                                        while (!(montonInterior[a][b].empty()) && ((carta1.peek().getNumero() == 7 && montonInterior[a][b].peek().getNumero() == 10)
+                                                || (montonInterior[a][b].peek().getNumero() - carta1.peek().getNumero() == 1))
+                                                && (montonInterior[a][b].peek().getPalo() == carta1.peek().getPalo())) {
+
+                                            carta1.push(montonInterior[a][b].pop());
+                                        }
+                                        if ((carta1.peek().getNumero() == 7 && montonInterior[c][d].peek().getNumero() == 10)
+                                                || (montonInterior[c][d].peek().getNumero() - carta1.peek().getNumero() == 1)) {
+                                            movimientos = true;
+                                        }
+                                        while (!carta1.empty()) {
+                                            montonInterior[a][b].push(carta1.pop());
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                        
+                         
+                        //Verificacion de Movimientos exteriores
+                        else{
+                            //Se ignora la misma posicion y si la del monton interior esta vacia
+                            if(!montonInterior[a][b].empty()){
+                                //Si el monton exterior esta vacio
+                                if(montonExterior[d].empty()){
+                                    //Si el primer elemento del monton interior es igual a uno
+                                    if(montonInterior[a][b].peek().getNumero()==1)
+                                        movimientos=true;
+                                //si el monton exterior no esta vacio
+                                }else{
+                                //Si son del mismo palo
+                                    if(montonInterior[a][b].peek().getPalo()==montonExterior[d].peek().getPalo()){
+                                        //Si son contiguas
+                                        if((montonInterior[a][b].peek().getNumero() == 10 && montonExterior[d].peek().getNumero() == 7)  
+                                            || (montonInterior[a][b].peek().getNumero() - montonExterior[d].peek().getNumero() == 1)){
+                                            movimientos=true;
+                                        }
+                    }
+
+                }
+            }
+        }
+        return movimientos;
+    }*/
+    
+    
     
 
 }
