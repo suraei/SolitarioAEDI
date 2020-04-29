@@ -136,4 +136,17 @@ public class Solitario {
         }while(opcion!=0);
         salir();
     }
+    
+    public static int[] seleccionarPosicion() {
+        int[] posicion = {-1, -1};
+        do {
+            posicion[0] = ES.pideNumero("[*]Selecciona la fila deseada [0-3]: "); 
+        } while (posicion[0] < 0 || posicion[0] > 3);
+        do {
+            posicion[1] = ES.pideNumero("[*]Selecciona la columna deseada [0-3]: ");
+        } while (posicion[1] < 0 || posicion[1] > 3);
+        return posicion;
+
+    }
+    
 }

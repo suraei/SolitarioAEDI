@@ -24,7 +24,7 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    private int[] seleccionarPosicion() {
+   /* private int[] seleccionarPosicion() {
         int[] posicion = {-1, -1};
         do {
             posicion[0] = ES.pideNumero("[*]Selecciona la fila deseada [0-3]: "); 
@@ -34,11 +34,11 @@ public class Jugador {
         } while (posicion[1] < 0 || posicion[1] > 3);
         return posicion;
 
-    }
+    }*/
     
        public int[] seleccionarCarta() {
         System.out.println("[?] Qué carta quieres mover del montón interior?");
-        return seleccionarPosicion();
+        return solitario.IU.Solitario.seleccionarPosicion();
 
     }
 
