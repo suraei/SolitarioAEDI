@@ -1,8 +1,4 @@
-/*
- * Representa al único jugador de la partida, identificado por el nombre 
- * Funcionalidad: le da la vuelta a una carta que está boca abajo, escoge una carta para moverla o al montón de descarte
- *                o la mueve encima de otra carta del interior
- */
+
 package solitario.Core;
 
 import solitario.IU.ES;
@@ -24,17 +20,6 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    /* private int[] seleccionarPosicion() {
-        int[] posicion = {-1, -1};
-        do {
-            posicion[0] = ES.pideNumero("[*]Selecciona la fila deseada [0-3]: "); 
-        } while (posicion[0] < 0 || posicion[0] > 3);
-        do {
-            posicion[1] = ES.pideNumero("[*]Selecciona la columna deseada [0-3]: ");
-        } while (posicion[1] < 0 || posicion[1] > 3);
-        return posicion;
-
-    }*/
     public int[] seleccionarCarta() {
         System.out.println("[?] Qué carta quieres mover del montón interior?");
         return solitario.IU.Solitario.seleccionarPosicion();
@@ -83,12 +68,7 @@ public class Jugador {
         Mesa.montonInterior[filaDest][colDest].push(Mesa.montonInterior[filaOri][colOri].pop()); // Movemos a la posicion de destino la carta situada en posicion origen
     }
 
-    //Colocar carta en un monton exterior
-    //Se saca una carta de un stack del monton interior y se mete en el stack del 
-    //palo correpondiente en el monton exterior
-    //La carta que se pone en el monton exterior tiene que ser mayor que la carta que queda oculta
-    //Si la carta que se oculta es un 7, la carta que se coloca encima tiene que ser un 10
-    //Solo se puede colocar un AS(1) como primera carta en un stack exterior vacío
+
     public int comprobarMovimientoExterior(int filaOri, int colOri) throws Exception {
 
         //Comprobar si el montón desde donde se quiere mover la carta está vacío
