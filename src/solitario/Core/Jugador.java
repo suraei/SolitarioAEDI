@@ -44,7 +44,7 @@ public class Jugador {
 
     public int[] seleccionarDestino() {
         System.out.println("[?] Indica la posición de destino de tu carta");
-        return seleccionarPosicion();
+        return solitario.IU.Solitario.seleccionarPosicion();
     }
     
         public void moverCartaInterior(int filaOri, int colOri, int filaDest, int colDest) throws Exception {
