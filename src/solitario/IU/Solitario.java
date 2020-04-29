@@ -48,58 +48,63 @@ public class Solitario {
         System.out.println("\n[%] Opciones: \n| 1) Mover carta del montón interior al montón exterior\n| 2) Mover carta del montón interior al montón interior\n| 0) Salir");
     }
 
-    private static int mostrarVictoria(){
+    private static int mostrarVictoria() {
         int opcion;
         System.out.println("[+]¡Enorabuena, has ganado!");
-        do{
-        opcion = ES.pideNumero("[?] ¿Quieres jugar de nuevo?\n| 1)Si\n| 0)No\n");
-        }while(opcion!=1 && opcion!=0);
+        do {
+            opcion = ES.pideNumero("[?] ¿Quieres jugar de nuevo?\n| 1)Si\n| 0)No\n");
+        } while (opcion != 1 && opcion != 0);
         return opcion;
     }
-    
-    private static int mostrarDerrota(){
+
+    private static int mostrarDerrota() {
         int opcion;
         System.out.println("[+]¡Lo siento, has perdido!");
-        do{
-        opcion = ES.pideNumero("[?] ¿Quieres jugar de nuevo?\n| 1)Si\n| 0)No\n");
-        }while(opcion!=1 && opcion!=0);
+        do {
+            opcion = ES.pideNumero("[?] ¿Quieres jugar de nuevo?\n| 1)Si\n| 0)No\n");
+        } while (opcion != 1 && opcion != 0);
         return opcion;
     }
-    
+
     private static void salir() {
         System.out.println("[*] Gracias por jugar al Solitario, esperamos verte pronto [*]");
         System.exit(0);
     }
-    
-    private static void jugar(){
+
+    private static int jugar() {
         int opcion;
-           while (!mesa.MontonExteriorCompleto()) { // Si no ha finalizado el juego sigue mostrando interfaz
+        while (!mesa.MontonExteriorCompleto() && jugador.movPosibles()) { // Si no ha finalizado el juego sigue mostrando interfaz
             do {
                 mostrarInterfaz();
                 opcion = ES.pideNumero("[?] Selecciona una opción: ");
             } while (opcion < 0 || opcion > 2);
-            switch(opcion){
-                case 1: 
+            switch (opcion) {
+                case 1:
                     int[] posicion = jugador.seleccionarCarta();
-                    try{
-                    jugador.moverCartaExterior(posicion[0], posicion[1]);
-                    }catch(Exception err){System.out.print("[!] ");
+                    try {
+                        jugador.moverCartaExterior(posicion[0], posicion[1]);
+                    } catch (Exception err) {
+                        System.out.print("[!] ");
                         System.out.println(err.getMessage());
                     }
                     break;
-                case 2: 
+                case 2:
                     int[] posOri = jugador.seleccionarCarta();
                     int[] posDest = jugador.seleccionarDestino();
-                    try{
-                    jugador.moverCartaInterior(posOri[0], posOri[1],posDest[0], posDest[1]);
-                    }catch(Exception err){System.out.print("[!] ");
+                    try {
+                        jugador.moverCartaInterior(posOri[0], posOri[1], posDest[0], posDest[1]);
+                    } catch (Exception err) {
+                        System.out.print("[!] ");
                         System.out.println(err.getMessage());
                     }
                     break;
-                case 0 : salir();
+                case 0:
+                    salir();
             }
-            
+
         }
+
+        return mesa.MontonExteriorCompleto() ? mostrarVictoria() : mostrarDerrota();
     }
 
     public static void inicioPartida() {
@@ -119,31 +124,26 @@ public class Solitario {
         jugador = crearJugador();
 
         //Crear partida
-        do{
-        try {
-            mesa = crearJuego();
-        } catch (Exception err) {
-            System.err.print("[!] No se ha podido crear el juego: ");
-            System.err.println(err.getMessage());
-            System.exit(1); // Sale con error
-        }
+        do {
+            try {
+                mesa = crearJuego();
+            } catch (Exception err) {
+                System.err.print("[!] No se ha podido crear el juego: ");
+                System.err.println(err.getMessage());
+                System.exit(1); // Sale con error
+            }
 
-        //Jugar
-       
-            jugar();
-        //if(mesa.movPosibles()){
-        opcion= mostrarVictoria();//}
-        //else{
-           // opcion=mostrarDerrota();
-        //}
-        }while(opcion!=0);
+            //Jugar
+            opcion = jugar();
+
+        } while (opcion != 0);
         salir();
     }
-    
+
     public static int[] seleccionarPosicion() {
         int[] posicion = {-1, -1};
         do {
-            posicion[0] = ES.pideNumero("[*]Selecciona la fila deseada [0-3]: "); 
+            posicion[0] = ES.pideNumero("[*]Selecciona la fila deseada [0-3]: ");
         } while (posicion[0] < 0 || posicion[0] > 3);
         do {
             posicion[1] = ES.pideNumero("[*]Selecciona la columna deseada [0-3]: ");
@@ -151,5 +151,5 @@ public class Solitario {
         return posicion;
 
     }
-    
+
 }

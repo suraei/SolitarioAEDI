@@ -195,6 +195,8 @@ public class Mesa {
         }
         return hayMovimientos;
     }*/
+
+    
     /*public boolean movPosibles() {
         boolean movimientos = false;
         int a = 0;//i
@@ -270,6 +272,8 @@ public class Mesa {
         }
         return movimientos;
     }*/
+    
+    
     
     
     
