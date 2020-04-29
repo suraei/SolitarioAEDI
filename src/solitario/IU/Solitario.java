@@ -57,6 +57,15 @@ public class Solitario {
         return opcion;
     }
     
+    private static int mostrarDerrota(){
+        int opcion;
+        System.out.println("[+]¡Lo siento, has perdido!");
+        do{
+        opcion = ES.pideNumero("[?] ¿Quieres jugar de nuevo?\n| 1)Si\n| 0)No\n");
+        }while(opcion!=1 && opcion!=0);
+        return opcion;
+    }
+    
     private static void salir() {
         System.out.println("[*] Gracias por jugar al Solitario, esperamos verte pronto [*]");
         System.exit(0);
@@ -73,7 +82,7 @@ public class Solitario {
                 case 1: 
                     int[] posicion = jugador.seleccionarCarta();
                     try{
-                    mesa.moverCartaExterior(posicion[0], posicion[1]);
+                    jugador.moverCartaExterior(posicion[0], posicion[1]);
                     }catch(Exception err){System.out.print("[!] ");
                         System.out.println(err.getMessage());
                     }
@@ -82,7 +91,7 @@ public class Solitario {
                     int[] posOri = jugador.seleccionarCarta();
                     int[] posDest = jugador.seleccionarDestino();
                     try{
-                    mesa.moverCartaInterior(posOri[0], posOri[1],posDest[0], posDest[1]);
+                    jugador.moverCartaInterior(posOri[0], posOri[1],posDest[0], posDest[1]);
                     }catch(Exception err){System.out.print("[!] ");
                         System.out.println(err.getMessage());
                     }
@@ -120,7 +129,9 @@ public class Solitario {
         }
 
         //Jugar
-        jugar();
+        //do{
+            jugar();
+        //}while(movimientosPosibles());
         opcion= mostrarVictoria();
         }while(opcion!=0);
         salir();

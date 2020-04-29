@@ -31,8 +31,8 @@ import java.util.Stack;
  */
 public class Mesa {
 
-    private final Stack<Carta>[] montonExterior; // 4 montones ( los 4 palos) 
-    private final Stack<Carta>[][] montonInterior;  // Una matriz
+    public static Stack<Carta>[] montonExterior; // 4 montones ( los 4 palos) 
+    public static Stack<Carta>[][] montonInterior;  // Una matriz
 
     public Mesa() {
         //Inicializa el monton exterior
@@ -82,7 +82,7 @@ public class Mesa {
     //La carta que se oculta en el stack destino tiene que ser 1 unidad > y del mismo palo que la que se mueve
     //Encima de un 10 tiene que colocarse un 7
     //No se puede mover una carta a un stack vacío
-    public void moverCartaInterior(int filaOri, int colOri, int filaDest, int colDest) throws Exception {
+    /*public void moverCartaInterior(int filaOri, int colOri, int filaDest, int colDest) throws Exception {
         //Comprobar si el montón desde donde se quiere mover la carta está vacío
         if (montonInterior[filaOri][colOri].empty()) {
             throw new Exception("Movimiento inválido : No se pueden mover cartas desde un espacio vacío");
@@ -139,7 +139,7 @@ public class Mesa {
         -SI LA CARTA ORIGEN ES MAYOR O IGUAL QUE LA CARTA DESTINO NO HACE NADA NI MUESTRA MENSAJE
         -NO SE COMPRUEBA SI LA CARTA ORIGEN ES UNA UNIDAD MENOR QUE LA CARTA DESTINO
          */
-    }
+   // }
 
     //Colocar carta en un monton exterior
     //Se saca una carta de un stack del monton interior y se mete en el stack del 
@@ -147,7 +147,7 @@ public class Mesa {
     //La carta que se pone en el monton exterior tiene que ser mayor que la carta que queda oculta
     //Si la carta que se oculta es un 7, la carta que se coloca encima tiene que ser un 10
     //Solo se puede colocar un AS(1) como primera carta en un stack exterior vacío
-    public void moverCartaExterior(int filaOri, int colOri) throws Exception {
+   /* public void moverCartaExterior(int filaOri, int colOri) throws Exception {
 
         //Comprobar si el montón desde donde se quiere mover la carta está vacío
         if (montonInterior[filaOri][colOri].empty()) {
@@ -179,8 +179,8 @@ public class Mesa {
         //Una vez listas las comprobaciones movemos la carta al montón exterior
         montonExterior[montonDest].push(montonInterior[filaOri][colOri].pop());
 
-        /*//Si el monton exterior esta vacío
-        if (montonExterior[montonDest].empty()) {
+        /*////Si el monton exterior esta vacío
+        /*if (montonExterior[montonDest].empty()) {
             //Solo puede ponerse un AS
             if (montonInterior[filaOri][colOri].peek().getNumero() == 1) {
                 //Se hace el movimiento del AS
@@ -206,7 +206,7 @@ public class Mesa {
         - NO SE COMPRUEBA QUE LA CARTA ORIGEN SEA UNA UNIDAD MAYOR QUE LA CARTA DESTINO
         - SI LA CARTA ORIGEN ES MENOR O IGUAL A LA DE DESTINO, NO HACE NADA NI MUESTRA NINGÚN MENSAJE
          */
-    }
+    //}
 
     //Muestra por pantalla las cartas que hay visibles en la mesa
     public void mostrarMesa() {
@@ -250,4 +250,6 @@ public class Mesa {
         }
         return flag;
     }
+    
+
 }
