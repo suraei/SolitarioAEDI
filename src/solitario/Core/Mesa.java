@@ -52,13 +52,13 @@ public class Mesa {
         }
     }
 
-    public Stack<Carta> getMontonExterior(int i) {
+   /* public Stack<Carta> getMontonExterior(int i) {
         return montonExterior[i];
     }
 
     public Stack<Carta> getMontonInterior(int i, int j) {
         return montonInterior[i][j];
-    }
+    }*/
 
     //Coloca las cartas en el monton interior: 2 cartas por stack y 3 cartas por stack
     //en las diagonales
@@ -136,7 +136,7 @@ public class Mesa {
         return flag;
     }
 
-    public void comprobarMovimientoInterior(int filaOri, int colOri, int filaDest, int colDest) throws Exception {
+    public void colocarCartaInterior(int filaOri, int colOri, int filaDest, int colDest) throws Exception {
         //Comprobar si el montón desde donde se quiere mover la carta está vacío
         if (montonInterior[filaOri][colOri].empty()) {
             throw new Exception("Movimiento inválido : No se pueden mover cartas desde un espacio vacío");
@@ -165,9 +165,11 @@ public class Mesa {
                 || (cartaOri.getNumero() != 7 && cartaOri.getNumero() != cartaDest.getNumero() - 1)) {
             throw new Exception("Movimiento inválido : La carta de destino no es una unidad mayor que la de origen");
         }
+        //Si pasa las comprobaciones realizamos movimiento
+        montonInterior[filaDest][colDest].push(montonInterior[filaOri][colOri].pop());
     }
 
-    public int comprobarMovimientoExterior(int filaOri, int colOri) throws Exception {
+    public void colocarCartaExterior(int filaOri, int colOri) throws Exception {
 
         //Comprobar si el montón desde donde se quiere mover la carta está vacío
         if (montonInterior[filaOri][colOri].empty()) {
@@ -196,7 +198,8 @@ public class Mesa {
                 throw new Exception("Movimiento inválido :La carta de destino no es una unidad menor que la de origen");
             }
         }
-        return montonDest; //Si no lanza ninguna excepción, devuelve el monton correspondiente al palo de esa carta
+        montonExterior[montonDest].push(montonInterior[filaOri][colOri].pop());
+        //return montonDest; //Si no lanza ninguna excepción, devuelve el monton correspondiente al palo de esa carta
     }
 
     //Se llama en cada bucle del metodo Jugar() en Solitario
@@ -221,7 +224,7 @@ public class Mesa {
                     while (!quedanMov && columnaC < montonInterior[fila].length) {
                         try {
                             //Comprueba el movimiento posible entre la carta origen y carta destino
-                            this.comprobarMovimientoInterior(fila, columna, filaC, columnaC);
+                            this.colocarCartaInterior(fila, columna, filaC, columnaC);
                             quedanMov = true; //Si el movimiento es posible, devuelve true y continúa la partida
                         } catch (Exception err) {
                         }
@@ -233,7 +236,7 @@ public class Mesa {
 
                 // --- Comprobaciones del montón exterior
                 try {
-                    this.comprobarMovimientoExterior(fila, columna);
+                    this.colocarCartaExterior(fila, columna);
                     quedanMov = true;
                 } catch (Exception err) {
                 }
